@@ -76,7 +76,7 @@ Returns a unified style receipt, corresponding to the [appStoreReceiptURL](https
 
 Returns a transaction style receipt, corresponding to the [transactionReceipt](https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKPaymentTransaction_Class/index.html#//apple_ref/occ/instp/SKPaymentTransaction/transactionReceipt).
 
-### Options
+##### Options:
 
 `:raw` - Boolean, if true returns the raw plist, otherwise returns a Base64 encoded string.
 
