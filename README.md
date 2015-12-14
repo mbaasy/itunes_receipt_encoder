@@ -2,6 +2,10 @@
 
 Encodes receipt data into iTunes encoded receipts and exports as [appStoreReceiptURL](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/index.html#//apple_ref/occ/instm/NSBundle/appStoreReceiptURL) or [transactionReceipt](https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKPaymentTransaction_Class/index.html#//apple_ref/occ/instp/SKPaymentTransaction/transactionReceipt) formats.
 
+[![Code Climate](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder/badges/gpa.svg)](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder)
+[![Test Coverage](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder/badges/coverage.svg)](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder/coverage)
+[![Build Status](https://travis-ci.org/mbaasy/itunes_receipt_encoder.svg?branch=master)](https://travis-ci.org/mbaasy/itunes_receipt_encoder)
+
 ## Install
 
 Install from the command line:
