@@ -5,9 +5,10 @@ require 'itunes_receipt_encoder/version'
 Gem::Specification.new do |spec|
   spec.name = 'itunes_receipt_encoder'
   spec.version = ItunesReceiptEncoder::VERSION
-  spec.summary = 'Generate iTunes receipts'
+  spec.summary = 'Encodes receipt data into iTunes encoded receipts'
   spec.description = <<-EOF
-    Generate iTunes receipts
+    Encodes receipt data into iTunes encoded receipts and exports as
+    appStoreReceiptURL or transactionReceipt formats.
   EOF
   spec.license = 'MIT'
   spec.authors = ['mbaasy.com']
