@@ -5,6 +5,9 @@ Encodes receipt data into iTunes encoded receipts and exports as [appStoreReceip
 [![Code Climate](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder/badges/gpa.svg)](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder)
 [![Test Coverage](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder/badges/coverage.svg)](https://codeclimate.com/github/mbaasy/itunes_receipt_encoder/coverage)
 [![Build Status](https://travis-ci.org/mbaasy/itunes_receipt_encoder.svg?branch=master)](https://travis-ci.org/mbaasy/itunes_receipt_encoder)
+[![Gem Version](https://badge.fury.io/rb/itunes_receipt_encoder.svg)](https://badge.fury.io/rb/itunes_receipt_encoder)
+[![Dependency Status](https://gemnasium.com/mbaasy/itunes_receipt_encoder.svg)](https://gemnasium.com/mbaasy/itunes_receipt_encoder)
+
 
 ## Install
 
