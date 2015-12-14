@@ -24,7 +24,7 @@ module ItunesReceiptEncoder
         when :ia5_string
           OpenSSL::ASN1::IA5String.new(@value.to_s).to_der
         when :integer
-          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(@value.to_i)).to_der
+          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(@value.to_s)).to_der
         else
           @value
         end
@@ -32,8 +32,8 @@ module ItunesReceiptEncoder
 
       def to_seq
         OpenSSL::ASN1::Sequence.new([
-          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(type.to_i)),
-          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(ASN1_VERSION)),
+          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(type.to_s)),
+          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(ASN1_VERSION.to_s)),
           OpenSSL::ASN1::OctetString.new(value.to_s)
         ])
       end
