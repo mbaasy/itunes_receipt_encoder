@@ -86,6 +86,41 @@ Returns a transaction style receipt, corresponding to the [transactionReceipt](h
 
 `:no_pst_dates` - Boolean, if true it will exclude PST timestamps from the results.
 
+## Command line
+
+You can use this library to generate files on the command line too:
+
+```
+Usage: itunes_receipt_encoder [options] file
+
+file: receipt data as JSON
+
+Options:
+    -s, --style STYLE                iTunes receipt output style
+                                     unified or transaction
+                                     defaults to unified
+    -r, --raw                        Return raw ouptput instead of Base64
+
+Unified receipt style options:
+    -c, --cert FILE                  SSL certificate file to create P7 payload
+    -k, --key FILE                   SSL private key file to create P7 payload
+
+Transaction receipt style options:
+    -i, --index N                    Use the specific index from in_app
+    -m, --no-ms-dates                Exclude millisecond timestamps from results
+    -p, --no-pst-dates               Exclude PST timestamps from results
+
+Additional options:
+    -h, --help                       Show this message
+    -v, --version                    Display the version number
+```
+
+##### Example:
+
+```sh
+$ itunes_receipt_encoder -s transaction path/to/transaction.json > path/to/save.txt
+```
+
 ---
 
 Copyright 2015 [mbaasy.com](https://mbaasy.com/). This project is subject to the [MIT License](/LICENSE).
