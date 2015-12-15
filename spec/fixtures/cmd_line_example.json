@@ -1,0 +1,24 @@
+{
+  "bundle_id": "com.mbaasy.ios",
+  "environment": "Production",
+  "application_version": "1.0",
+  "original_application_version": "1.0",
+  "creation_date": "2015-12-15T10:49:50Z",
+  "in_app": [{
+    "quantity": 1,
+    "product_id": "premium",
+    "transaction_id": "582591442087453",
+    "original_transaction_id": "582591442087453",
+    "purchase_date": "2015-12-15T10:49:50Z",
+    "original_purchase_date": "2015-12-15T10:49:50Z",
+    "expires_date": "2016-01-15T10:49:50Z",
+    "web_order_line_item_id": "566905420318744"
+  }, {
+    "quantity": 1,
+    "product_id": "extra-life",
+    "transaction_id": "970762356111308",
+    "original_transaction_id": "223608664143082",
+    "purchase_date": "2015-12-10T18:31:27Z",
+    "original_purchase_date": "2015-12-10T18:31:27Z"
+  }]
+}

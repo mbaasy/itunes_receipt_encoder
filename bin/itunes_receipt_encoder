@@ -1,0 +1,94 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.push File.expand_path('../../lib', __FILE__)
+
+require 'json'
+require 'optparse'
+require 'itunes_receipt_encoder'
+
+options = {
+  style: :unified
+}
+optparse = OptionParser.new do |opts|
+  opts.program_name = 'itunes_receipt_encoder'
+  opts.banner = 'Usage: itunes_receipt_encoder [options] file'
+
+  opts.separator ''
+  opts.separator 'file: receipt data as JSON'
+
+  opts.separator ''
+  opts.separator 'Options:'
+
+  opts.on('-s', '--style STYLE',
+          %i(unified transaction),
+          'iTunes receipt output style',
+          'unified or transaction',
+          'defaults to unified') do |style|
+    options[:style] = style
+  end
+
+  opts.on('-r', '--raw', 'Return raw ouptput instead of Base64') do |raw|
+    options[:raw] = raw
+  end
+
+  opts.separator ''
+  opts.separator 'Unified receipt style options:'
+
+  opts.on('-c', '--cert FILE',
+          'SSL certificate file to create P7 payload') do |file|
+    options[:cert] = File.read(file)
+  end
+
+  opts.on('-k', '--key FILE',
+          'SSL private key file to create P7 payload') do |file|
+    options[:key] = File.read(file)
+  end
+
+  opts.separator ''
+  opts.separator 'Transaction receipt style options:'
+
+  opts.on('-i', '--index N',
+          'Use the specific index from in_app') do |index|
+    options[:index] = index
+  end
+
+  opts.on('-m', '--no-ms-dates',
+          'Exclude millisecond timestamps from results') do |no_ms_dates|
+    options[:no_ms_dates] = no_ms_dates
+  end
+
+  opts.on('-p', '--no-pst-dates',
+          'Exclude PST timestamps from results') do |no_pst_dates|
+    options[:no_pst_dates] = no_pst_dates
+  end
+
+  opts.separator ''
+  opts.separator 'Additional options:'
+
+  opts.on_tail('-h', '--help', 'Show this message') do
+    puts opts
+    exit
+  end
+
+  opts.on_tail('-v', '--version', 'Display the version number') do
+    puts ItunesReceiptEncoder::VERSION
+    exit
+  end
+end
+
+optparse.parse!
+
+if ARGV.empty?
+  puts optparse.to_s
+  exit
+end
+
+json = JSON.parse(File.read(ARGV.first), symbolize_names: true)
+encoder = ItunesReceiptEncoder.new(json)
+case options.delete(:style)
+when :unified
+  puts encoder.to_unified(options)
+when :transaction
+  puts encoder.to_transaction(options)
+end
+exit(1)
