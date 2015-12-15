@@ -10,9 +10,10 @@ module ItunesReceiptEncoder
     include Utils
 
     attr_accessor :quantity, :product_id, :transaction_id,
-                  :original_transaction_id, :purchase_date,
-                  :original_purchase_date, :expires_date, :cancellation_date,
-                  :web_order_line_item_id, :item_id
+                  :original_transaction_id, :web_order_line_item_id, :item_id
+
+    timestamp_accessor :purchase_date, :original_purchase_date, :expires_date,
+                       :cancellation_date
 
     def initialize(attrs = {})
       attrs.each { |key, val| send("#{key}=", val) }
@@ -24,9 +25,9 @@ module ItunesReceiptEncoder
         asn1_product_id,
         asn1_transaction_id,
         asn1_original_transaction_id,
-        asn1_purchase_date,
-        asn1_original_purchase_date,
         asn1_web_order_line_item_id,
+        (asn1_purchase_date if purchase_date),
+        (asn1_original_purchase_date if original_purchase_date),
         (asn1_expires_date if expires_date),
         (asn1_cancellation_date if cancellation_date)
       ]
@@ -36,6 +37,7 @@ module ItunesReceiptEncoder
       hash = {
         'quantity' => quantity,
         'product-id' => product_id,
+        'item-id' => item_id,
         'transaction-id' => transaction_id,
         'original_transaction-id' => original_transaction_id,
         'purchase-date' => gmt_time(purchase_date),
@@ -74,23 +76,23 @@ module ItunesReceiptEncoder
     end
 
     def asn1_web_order_line_item_id
-      ASN1.sequence web_order_line_item_id, 1711, :integer
+      ASN1.sequence web_order_line_item_id || 0, 1711, :integer
     end
 
     def asn1_purchase_date
-      ASN1.sequence ASN1.time(purchase_date), 1704, :ia5_string
+      ASN1.sequence asn1_time(purchase_date), 1704, :ia5_string
     end
 
     def asn1_original_purchase_date
-      ASN1.sequence ASN1.time(original_purchase_date), 1706, :ia5_string
+      ASN1.sequence asn1_time(original_purchase_date), 1706, :ia5_string
     end
 
     def asn1_expires_date
-      ASN1.sequence ASN1.time(expires_date), 1708, :ia5_string
+      ASN1.sequence asn1_time(expires_date), 1708, :ia5_string
     end
 
     def asn1_cancellation_date
-      ASN1.sequence ASN1.time(cancellation_date), 1712, :ia5_string
+      ASN1.sequence asn1_time(cancellation_date), 1712, :ia5_string
     end
   end
 end

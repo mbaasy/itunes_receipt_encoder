@@ -11,9 +11,10 @@ module ItunesReceiptEncoder
     include Utils
 
     attr_accessor :environment, :bundle_id, :application_version,
-                  :original_application_version, :creation_date,
-                  :expiration_date, :opaque_value, :sha1_hash, :in_app,
-                  :unique_vendor_identifier
+                  :original_application_version, :opaque_value, :sha1_hash,
+                  :in_app, :unique_vendor_identifier
+
+    timestamp_accessor :creation_date, :expiration_date
 
     def initialize(attrs = {})
       attrs.each { |key, val| send("#{key}=", val) }
@@ -27,7 +28,7 @@ module ItunesReceiptEncoder
         asn1_bundle_id,
         asn1_application_version,
         asn1_original_application_version,
-        asn1_creation_date,
+        (asn1_creation_date if creation_date),
         (asn1_opaque_value if opaque_value),
         (asn1_sha1_hash if sha1_hash),
         (asn1_expiration_date if expiration_date)
@@ -40,7 +41,7 @@ module ItunesReceiptEncoder
         'bid' => bundle_id.to_s,
         'bvrs' => application_version.to_s,
         'unique-vendor-identifier' => unique_vendor_identifier.to_s
-      }.merge(transaction.to_plist_hash(options))
+      }.merge(transaction.to_plist_hash(options)).delete_if { |_, v| v.nil? }
     end
 
     private
@@ -70,11 +71,11 @@ module ItunesReceiptEncoder
     end
 
     def asn1_creation_date
-      ASN1.sequence ASN1.time(creation_date), 12, :ia5_string
+      ASN1.sequence asn1_time(creation_date), 12, :ia5_string
     end
 
     def asn1_expiration_date
-      ASN1.sequence ASN1.time(expiration_date), 21, :ia5_string
+      ASN1.sequence asn1_time(expiration_date), 21, :ia5_string
     end
 
     def asn1_in_app

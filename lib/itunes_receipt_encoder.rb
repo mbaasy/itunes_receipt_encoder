@@ -1,3 +1,4 @@
+require 'itunes_receipt_encoder/version'
 require 'itunes_receipt_encoder/receipt'
 
 ##

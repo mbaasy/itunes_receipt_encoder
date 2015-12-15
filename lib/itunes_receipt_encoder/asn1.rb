@@ -16,9 +16,5 @@ module ItunesReceiptEncoder
     def self.set(array)
       OpenSSL::ASN1::Set.new(array.compact)
     end
-
-    def self.time(time)
-      time && time.utc.strftime('%FT%TZ')
-    end
   end
 end
