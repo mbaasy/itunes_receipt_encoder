@@ -31,11 +31,13 @@ module ItunesReceiptEncoder
       end
 
       def to_seq
-        OpenSSL::ASN1::Sequence.new([
-          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(type.to_s)),
-          OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(ASN1_VERSION.to_s)),
-          OpenSSL::ASN1::OctetString.new(value.to_s)
-        ])
+        OpenSSL::ASN1::Sequence.new(
+          [
+            OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(type.to_s)),
+            OpenSSL::ASN1::Integer.new(OpenSSL::BN.new(ASN1_VERSION.to_s)),
+            OpenSSL::ASN1::OctetString.new(value.to_s)
+          ]
+        )
       end
     end
   end

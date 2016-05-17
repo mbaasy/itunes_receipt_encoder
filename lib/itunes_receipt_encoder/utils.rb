@@ -25,8 +25,6 @@ module ItunesReceiptEncoder
       end
     end
 
-    private
-
     def self.included(base)
       base.extend(ClassMethods)
     end

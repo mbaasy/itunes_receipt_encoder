@@ -21,7 +21,7 @@ describe ItunesReceiptEncoder do
     let(:creation_date) { random_time }
     let(:expiration_date) { creation_date + 31_536_000 }
     let(:in_app) do
-      rand(3..6).times.map do |i|
+      Array.new(rand(3..6)).map do |i|
         {
           quantity: rand(1..10),
           product_id: FFaker::Internet.domain_word + i.to_s,

@@ -8,7 +8,7 @@ module ItunesReceiptEncoder
   ##
   # ItunesReceiptEncoder::Receipt
   class Receipt
-    PRIVATE_KEY = <<-EOF
+    PRIVATE_KEY = <<-EOF.freeze
 -----BEGIN RSA PRIVATE KEY-----
 MIICXgIBAAKBgQCwFAFtL0PVWIAhkZGvOieoG+FYbSxGsQZ+oj8p71kSIPj4zo1/
 tNAB4hZZkhNUcys1WXb1AK5dXlMs4AwK6zIANvlwJxu4fBIW+sENc4yHaJWfcZJR
@@ -25,7 +25,7 @@ v5Pq6OQRr/JzJnPr45TNAkEAkqll2DUKWTKiva4MPvda30vZFbraRkW0WUWNIara
 RDUtoqjlu22PZhexNT4aulrb7OVBxq4yjqdGq5Kgo1z8mw==
 -----END RSA PRIVATE KEY-----
 EOF
-    CERTIFICATE = <<-EOF
+    CERTIFICATE = <<-EOF.freeze
 -----BEGIN CERTIFICATE-----
 MIIC3jCCAkegAwIBAgIJAN0obOgx+IbBMA0GCSqGSIb3DQEBBQUAMFQxCzAJBgNV
 BAYTAkRFMQ8wDQYDVQQIEwZCZXJsaW4xDzANBgNVBAcTBkJlcmxpbjEjMCEGA1UE
@@ -71,7 +71,7 @@ EOF
         'pod' => options.fetch(:pod, 100),
         'signing-status' => options.fetch(:signing_status, 0)
       }
-      data.merge!('environment' => payload.environment) unless
+      data['environment'] = payload.environment unless
         payload.environment == 'Production'
       plist = CFPropertyList::List.new
       plist.value = CFPropertyList.guess data
