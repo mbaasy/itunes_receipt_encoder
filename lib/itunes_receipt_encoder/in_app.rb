@@ -40,6 +40,7 @@ module ItunesReceiptEncoder
         'item-id' => item_id,
         'transaction-id' => transaction_id,
         'original_transaction-id' => original_transaction_id,
+        'web-order-line-item-id' => web_order_line_item_id,
         'purchase-date' => gmt_time(purchase_date),
         'original-purchase-date' => gmt_time(original_purchase_date),
         'expires-date-formatted' => gmt_time(expires_date)

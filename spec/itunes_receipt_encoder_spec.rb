@@ -114,6 +114,8 @@ describe ItunesReceiptEncoder do
           expect(subject[:quantity]).to eq(in_app[index][:quantity])
           expect(subject[:product_id]).to eq(in_app[index][:product_id])
           expect(subject[:transaction_id]).to eq(in_app[index][:transaction_id])
+          expect(subject[:web_order_line_item_id])
+            .to eq(in_app[index][:web_order_line_item_id])
           expect(subject[:original_transaction_id])
             .to eq(in_app[index][:original_transaction_id])
         end
